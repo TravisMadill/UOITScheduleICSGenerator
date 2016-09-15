@@ -40,6 +40,12 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +68,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(163, 233);
+            this.button1.Location = new System.Drawing.Point(163, 382);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 23);
             this.button1.TabIndex = 2;
@@ -118,6 +124,16 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(15, 185);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(57, 20);
             this.numericUpDown1.TabIndex = 8;
@@ -166,11 +182,68 @@
             this.checkBox2.Text = "Show as busy";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(12, 247);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(262, 20);
+            this.textBox4.TabIndex = 13;
+            this.textBox4.Text = "Lec.";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 231);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(105, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Format \"Lecture\" as:";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(12, 286);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(262, 20);
+            this.textBox5.TabIndex = 15;
+            this.textBox5.Text = "Tut.";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 270);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Format \"Tutorial\" as:";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(12, 325);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(262, 20);
+            this.textBox6.TabIndex = 17;
+            this.textBox6.Text = "Lab:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 309);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(119, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Format \"Laboratory\" as:";
+            // 
             // Form_Format
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(286, 268);
+            this.ClientSize = new System.Drawing.Size(286, 417);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.comboBox1);
@@ -205,5 +278,11 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label7;
     }
 }

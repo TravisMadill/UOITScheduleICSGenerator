@@ -37,7 +37,7 @@ namespace UOITScheduleICSGenerator
         {
             Class b = new Class();
             b.StartDate = StartDate;
-            b.EndTime = EndDate;
+            b.EndDate = EndDate;
             b.StartTime = StartTime;
             b.EndTime = EndTime;
             b.Weekday = Weekday;

@@ -20,19 +20,40 @@ namespace UOITScheduleICSGenerator
             InitializeComponent();
             if(File.Exists(settingFilePath))
             {
-                using (BinaryReader br = new BinaryReader(File.Open(settingFilePath, FileMode.Open)))
+                try
                 {
-                    textBox1.Text = br.ReadString(); //Title
-                    textBox2.Text = br.ReadString(); //Description
-                    textBox3.Text = br.ReadString(); //Location
-                    checkBox2.Checked = br.ReadBoolean();
-                    if (br.ReadBoolean()) //Reminders
+                    using (BinaryReader br = new BinaryReader(File.Open(settingFilePath, FileMode.Open)))
                     {
-                        checkBox1.Checked = true;
-                        numericUpDown1.Value = br.ReadDecimal();
-                        comboBox1.SelectedIndex = br.ReadInt32();
+                        textBox1.Text = br.ReadString(); //Title
+                        textBox2.Text = br.ReadString(); //Description
+                        textBox3.Text = br.ReadString(); //Location
+                        textBox4.Text = br.ReadString(); //Lecture
+                        textBox5.Text = br.ReadString(); //Tutorial
+                        textBox6.Text = br.ReadString(); //Laboratory
+                        checkBox2.Checked = br.ReadBoolean(); //Busy
+                        if (br.ReadBoolean()) //Reminders
+                        {
+                            checkBox1.Checked = true;
+                            numericUpDown1.Value = br.ReadDecimal();
+                            comboBox1.SelectedIndex = br.ReadInt32();
+                        }
+                        else checkBox1.Checked = false;
+
+                        br.Close();
                     }
-                    else checkBox1.Checked = false;
+                }
+                catch (IOException)
+                {
+                    textBox1.Text = "<ClassType>: <CourseName> (<CRN>)"; //Title
+                    textBox2.Text = "Course code: <CourseCode>-<CourseSection>" + Environment.NewLine + "CRN: <CRN>"; //Description
+                    textBox3.Text = "<Location>"; //Location
+                    textBox4.Text = "Lec."; //Lecture
+                    textBox5.Text = "Tut."; //Tutorial
+                    textBox6.Text = "Lab"; //Laboratory
+                    checkBox2.Checked = true; //Busy
+                    checkBox1.Checked = true;
+                    numericUpDown1.Value = 20;
+                    comboBox1.SelectedIndex = 0;
                 }
             }
             else
@@ -48,6 +69,9 @@ namespace UOITScheduleICSGenerator
                 bw.Write(textBox1.Text);
                 bw.Write(textBox2.Text);
                 bw.Write(textBox3.Text);
+                bw.Write(textBox4.Text);
+                bw.Write(textBox5.Text);
+                bw.Write(textBox6.Text);
                 bw.Write(checkBox2.Checked);
                 bw.Write(checkBox1.Checked);
                 if (checkBox1.Checked)
@@ -55,6 +79,7 @@ namespace UOITScheduleICSGenerator
                     bw.Write(numericUpDown1.Value);
                     bw.Write(comboBox1.SelectedIndex);
                 }
+                bw.Close();
             }
             MessageBox.Show(":)");
             Close();
