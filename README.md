@@ -15,12 +15,21 @@ Click "Formatting options" to change the layout.
 
 Replacement commands:
 > `<ClassType>`: The type of this class (ie., Lecture, Tutorial, or Labs).
+
 > `<CourseName>`: The full name of the course.
+> 
 > `<CourseCode>`: The course's code (ie. MATH 1010U).
+> 
 > `<CourseSection>`: The course's section.
+> 
 > `<CRN>`: The course's CRN.
+> 
 > `<Location>`: Where the course takes place.
+> 
 > `<Instructor>`: The instructor of the course.
+> 
 > `<StartTime>`: The time the course starts.
+> 
 > `<EndTime>`: The time the course ends.
+> 
 > `<WeekNumber>`: The week number of this course (used only for biweekly courses, like labs)
