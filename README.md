@@ -13,7 +13,7 @@ Reason being, this program cannot read within frames. If that doesn't make sense
 You can also manually format the calendar information to your liking as well.
 Click "Formatting options" to change the layout.
 
-Replacement commands:
+## Replacement commands:
 * `<ClassType>`: The type of this class (ie., Lecture, Tutorial, or Labs).
 * `<CourseName>`: The full name of the course.
 * `<CourseCode>`: The course's code (ie. MATH 1010U).
