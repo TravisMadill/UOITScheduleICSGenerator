@@ -81,7 +81,7 @@ namespace UOITScheduleICSGenerator
                 }
                 bw.Close();
             }
-            MessageBox.Show(":)");
+            Console.WriteLine("Saved to settings.txt");
             Close();
         }
 

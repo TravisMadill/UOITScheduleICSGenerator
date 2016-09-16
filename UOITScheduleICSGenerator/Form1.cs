@@ -142,8 +142,6 @@ namespace UOITScheduleICSGenerator
                 content = CalFile.CreateICSFileContents(events);
 
                 saveFileDialog1.ShowDialog();
-                
-                MessageBox.Show(":)");
             }
         }
 
