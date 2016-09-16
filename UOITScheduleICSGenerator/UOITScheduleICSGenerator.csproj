@@ -61,6 +61,12 @@
     <Compile Include="Form_Format.Designer.cs">
       <DependentUpon>Form_Format.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_HowTo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_HowTo.Designer.cs">
+      <DependentUpon>Form_HowTo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -68,6 +74,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Format.resx">
       <DependentUpon>Form_Format.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_HowTo.resx">
+      <DependentUpon>Form_HowTo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

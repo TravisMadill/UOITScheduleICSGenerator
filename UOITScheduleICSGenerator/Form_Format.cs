@@ -25,7 +25,7 @@ namespace UOITScheduleICSGenerator
                     using (BinaryReader br = new BinaryReader(File.Open(settingFilePath, FileMode.Open)))
                     {
                         textBox1.Text = br.ReadString(); //Title
-                        textBox2.Text = br.ReadString(); //Description
+                        textBox2.Text = br.ReadString().Replace(@"\n", Environment.NewLine); //Description
                         textBox3.Text = br.ReadString(); //Location
                         textBox4.Text = br.ReadString(); //Lecture
                         textBox5.Text = br.ReadString(); //Tutorial
@@ -67,7 +67,7 @@ namespace UOITScheduleICSGenerator
             using(BinaryWriter bw = new BinaryWriter(File.Open(settingFilePath, FileMode.Open)))
             {
                 bw.Write(textBox1.Text);
-                bw.Write(textBox2.Text);
+                bw.Write(textBox2.Text.Replace(Environment.NewLine, @"\n"));
                 bw.Write(textBox3.Text);
                 bw.Write(textBox4.Text);
                 bw.Write(textBox5.Text);

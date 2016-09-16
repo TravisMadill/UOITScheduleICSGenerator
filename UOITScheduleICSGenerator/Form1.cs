@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace UOITScheduleICSGenerator
 {
@@ -16,6 +17,7 @@ namespace UOITScheduleICSGenerator
     {
 
         Form_Format f;
+        Form_HowTo fh;
 
         public static string termSelectURL = @"https://ssbp.mycampus.ca/prod_uoit/bwskflib.P_SelDefTerm2";
         public static string loginURL = @"https://portal.mycampus.ca/cp/home/login";
@@ -80,6 +82,7 @@ namespace UOITScheduleICSGenerator
                     //Console.WriteLine(); //(For breakpoint)
                     int tablePos = 0;
                     string time = "";
+                    bool notTBA = true;
                     Class c = new Class();
                     for (int j = 0; j < classInfo.Length; j++)
                     {
@@ -107,18 +110,27 @@ namespace UOITScheduleICSGenerator
                                 else c.WeekNumber = "N/A";
                             }
                             else if ((tablePos - 21) % 8 == 2) // Class time
+                            {
                                 time = classInfo[j];
-                            else if ((tablePos - 21) % 8 == 3) // Weekday
+                                if (time == "TBA")
+                                    notTBA = false;
+                            }
+                            else if ((tablePos - 21) % 8 == 3 && notTBA) // Weekday
+                            {
                                 c.Weekday = classInfo[j];
-                            else if ((tablePos - 21) % 8 == 4) // Location
+                                if (time == "TBA")
+                                    notTBA = false;
+                            }
+                            else if ((tablePos - 21) % 8 == 4 && notTBA) // Location
                                 c.Location = classInfo[j];
-                            else if ((tablePos - 21) % 8 == 5) // Class dates
+                            else if ((tablePos - 21) % 8 == 5 && notTBA) // Class dates
                                 c.parseDateAndTime(classInfo[j], time);
-                            else if ((tablePos - 21) % 8 == 6) // Class type
+                            else if ((tablePos - 21) % 8 == 6 && notTBA) // Class type
                                 c.ClassType = classInfo[j];
                             else if ((tablePos - 21) % 8 == 7) // Technically instructor, but we got it earlier, so use this opporitunity to add other times for this class
                             {
-                                schedule.Add(c.Clone());
+                                if (notTBA) //If this course's times are TBA (usually for online courses), then don't add them to the schedule.
+                                    schedule.Add(c.Clone());
                             }
                         }
                         tablePos++;
@@ -129,6 +141,8 @@ namespace UOITScheduleICSGenerator
                     events.Add(CalEvent.classAsCalEvent(c));
                 content = CalFile.CreateICSFileContents(events);
 
+                saveFileDialog1.ShowDialog();
+                
                 MessageBox.Show(":)");
             }
         }
@@ -141,6 +155,39 @@ namespace UOITScheduleICSGenerator
         private void button5_Click(object sender, EventArgs e)
         {
             webBrowser1.Url = new Uri(termSelectURL);
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            if (!e.Cancel && content != null)
+            {
+                using (StreamWriter w = new StreamWriter(File.Open(saveFileDialog1.FileName, FileMode.Create)))
+                {
+                    w.Write(content);
+                    w.Close();
+                }
+                MessageBox.Show("Saved.");
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (webBrowser1.CanGoBack)
+                webBrowser1.GoBack();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Url = new Uri(@"C:\Users\100547276\Downloads\new 1.html");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (fh == null)
+                fh = new Form_HowTo();
+            else if (fh.IsDisposed)
+                fh = new Form_HowTo();
+            fh.Show();
         }
     }
 }
