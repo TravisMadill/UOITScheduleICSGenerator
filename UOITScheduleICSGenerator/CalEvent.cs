@@ -88,15 +88,15 @@ namespace UOITScheduleICSGenerator
             if (c.StartDate == c.EndDate)
                 ce.IsRecurring = false;
             else ce.IsRecurring = true;
-            ce.RecurrenceConditions = "RRULE:FREQ=WEEKLY;UNTIL="+ DateTime.Parse(c.EndDate + " " + c.EndTime).ToString("yyyyMMddTHHmmssZ") + ";BYDAY=" + c.Weekday;
+            ce.RecurrenceConditions = "RRULE:FREQ=WEEKLY;UNTIL="+ DateTime.Parse(c.EndDate + " " + c.EndTime).AddHours(5).ToString("yyyyMMddTHHmmssZ") + ";BYDAY=" + c.Weekday;
             if (reminder != null)
             {
                 if (reminder.Split(' ')[1] == "0")
-                    ce.Reminder = "BEGIN:VALARM\r\nACTION: DISPLAY\r\nDESCRIPTION:This is an event reminder\r\nTRIGGER:-P0DT0H" + reminder.Split(' ')[0] + "M0S\r\nEND:VALARM";
+                    ce.Reminder = "BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:This is an event reminder\r\nTRIGGER:-P0DT0H" + reminder.Split(' ')[0] + "M0S\r\nEND:VALARM";
                 else if (reminder.Split(' ')[1] == "1")
-                    ce.Reminder = "BEGIN:VALARM\r\nACTION: DISPLAY\r\nDESCRIPTION:This is an event reminder\r\nTRIGGER:-P0DT" + reminder.Split(' ')[0] + "H0M0S\r\nEND:VALARM";
+                    ce.Reminder = "BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:This is an event reminder\r\nTRIGGER:-P0DT" + reminder.Split(' ')[0] + "H0M0S\r\nEND:VALARM";
                 else if (reminder.Split(' ')[1] == "2")
-                    ce.Reminder = "BEGIN:VALARM\r\nACTION: DISPLAY\r\nDESCRIPTION:This is an event reminder\r\nTRIGGER:-P" + reminder.Split(' ')[0] + "DT0H0M0S\r\nEND:VALARM";
+                    ce.Reminder = "BEGIN:VALARM\r\nACTION:DISPLAY\r\nDESCRIPTION:This is an event reminder\r\nTRIGGER:-P" + reminder.Split(' ')[0] + "DT0H0M0S\r\nEND:VALARM";
 
             }
             else ce.Reminder = "";
