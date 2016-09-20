@@ -39,17 +39,19 @@ namespace UOITScheduleICSGenerator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(webBrowser1.DocumentText);
-            /*var loginInfo = new System.Collections.Specialized.NameValueCollection();
-            loginInfo.Add("userid", textBox1.Text);
-            loginInfo.Add("pass", textBox2.Text);
+            //Console.WriteLine(webBrowser1.DocumentText);
+            var loginInfo = new System.Collections.Specialized.NameValueCollection();
+            loginInfo.Add("cplogin.userid", textBox1.Text);
+            loginInfo.Add("cplogin.pass", textBox2.Text);
+            loginInfo.Add("cplogin.uuid", "0xACA021");
+            client.Headers.Add(HttpRequestHeader.Cookie, "");
             byte[] response = client.UploadValues(loginURL, "POST", loginInfo);
             string resp = Encoding.UTF8.GetString(response);
             Console.WriteLine(Encoding.UTF8.GetString(response));
             if (resp.Contains("<b>ERROR:</b>&nbsp;&nbsp;&nbsp;"))
             {
                 MessageBox.Show(resp.Substring(resp.IndexOf("<b>ERROR:</b>&nbsp;&nbsp;&nbsp;")+3 + "<b>ERROR:</b>&nbsp;&nbsp;&nbsp;".Length, resp.IndexOf("</i><br>", resp.IndexOf("<b>ERROR:</b>&nbsp;&nbsp;&nbsp;")+3) - resp.IndexOf("<b>ERROR:</b>&nbsp;&nbsp;&nbsp;") - 11));
-            }*/
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -64,7 +66,9 @@ namespace UOITScheduleICSGenerator
         private void button2_Click(object sender, EventArgs e)
         {
             if (!webBrowser1.DocumentText.Contains("<TITLE>Student Detail Schedule</TITLE>"))
-                MessageBox.Show("This is not the correct webpage.");
+                MessageBox.Show("This is not the correct webpage." +
+                    (webBrowser1.DocumentText.Contains("<frameset") ? "\n\nIf you ARE on the schedule page, press the \"Go to schedule page\" button so that the data can be read properly.\n\n...Yeah, it's a dumb thing to do, but the fact that this app needs to exist in order for this to work properly suggests otherwise."
+                    : "\n\nMake sure you're on the \"Detailed Schedule\" page,\nand NOT the \"Schedule by Date & Time\" page."));
             else
             {
                 //Split every section by a line break command.
@@ -186,6 +190,12 @@ namespace UOITScheduleICSGenerator
             else if (fh.IsDisposed)
                 fh = new Form_HowTo();
             fh.Show();
+        }
+
+        private void resizeWindow(object sender, EventArgs e)
+        {
+            Form currentForm = sender as Form;
+            webBrowser1.Size = new Size(currentForm.Size.Width - 40, currentForm.Size.Height - 120);
         }
     }
 }
