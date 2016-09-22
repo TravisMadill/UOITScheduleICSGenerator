@@ -78,7 +78,7 @@
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(611, 803);
+            this.richTextBox1.Location = new System.Drawing.Point(621, 803);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(18, 10);
             this.richTextBox1.TabIndex = 4;
@@ -88,7 +88,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(1011, 827);
+            this.button2.Location = new System.Drawing.Point(1101, 827);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(168, 23);
             this.button2.TabIndex = 5;
@@ -99,7 +99,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(1011, 798);
+            this.button3.Location = new System.Drawing.Point(1101, 798);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(168, 23);
             this.button3.TabIndex = 6;
@@ -113,9 +113,11 @@
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.Size = new System.Drawing.Size(1167, 779);
+            this.webBrowser1.Size = new System.Drawing.Size(1257, 779);
             this.webBrowser1.TabIndex = 7;
             this.webBrowser1.Url = new System.Uri("http://uoit.ca/mycampus", System.UriKind.Absolute);
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
             // 
             // button4
             // 
@@ -163,7 +165,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(136, 23);
             this.button7.TabIndex = 11;
-            this.button7.Text = "Make with source";
+            this.button7.Text = "debug";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Visible = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -184,7 +186,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1191, 862);
+            this.ClientSize = new System.Drawing.Size(1281, 862);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);

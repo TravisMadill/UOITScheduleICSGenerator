@@ -24,11 +24,13 @@ namespace UOITScheduleICSGenerator
         public static string scheduleURL = @"https://ssbp.mycampus.ca/prod_uoit/bwskfshd.P_CrseSchdDetl";
         public static string content;
         WebClient client = new WebClient();
+        public bool head;
 
         public Form1()
         {
             InitializeComponent();
 
+            head = true;
             
             //string reply = client.DownloadString(scheduleURL);
             //Console.WriteLine(reply);
@@ -180,7 +182,8 @@ namespace UOITScheduleICSGenerator
 
         private void button7_Click(object sender, EventArgs e)
         {
-            webBrowser1.Url = new Uri(@"C:\Users\100547276\Downloads\new 1.html");
+            HtmlElementCollection hec = webBrowser1.Document.All;
+            Console.WriteLine(webBrowser1.DocumentText.Substring(0, 100000));
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -196,6 +199,27 @@ namespace UOITScheduleICSGenerator
         {
             Form currentForm = sender as Form;
             webBrowser1.Size = new Size(currentForm.Size.Width - 40, currentForm.Size.Height - 120);
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            if (head && webBrowser1.Url.ToString().Equals(@"https://uoit.ca/mycampus/"))
+            {
+                //Strip down all the stuff that's not the login form.
+                string text = webBrowser1.DocumentText;
+                webBrowser1.DocumentText = text.Substring(0, text.IndexOf("<header")) + text.Substring(text.IndexOf("</header") + "</header>".Length, text.IndexOf("<!-- END LOGIN AREA -->") - text.IndexOf("</header") - 9)
+                    .Replace("<nav aria-label=\"Breadcrumbs\" class=\"breadcrumbs\" role=\"menubar\">", "")
+                    .Replace("<li role=\"menuitem\"><a href=\"../index.php\">UOIT</a></li>", "")
+                    .Replace("<li class=\"current\" role=\"menuitem\">MyCampus</li>", "")
+                    .Replace("</nav>", "");
+                head = false;
+            }
+        }
+
+        private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            if (!webBrowser1.Url.ToString().Equals(@"https://uoit.ca/mycampus/"))
+                head = true;
         }
     }
 }
