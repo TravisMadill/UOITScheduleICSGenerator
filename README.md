@@ -1,5 +1,7 @@
 # UOITScheduleICSGenerator
 Use the web browser to log in to MyCampus.
+(Because this is a Windows based program, this is basically uses Internet Explorer in a fancy shell, so expect some wonky-ness in the formatting. Try scrolling around to find the login area if you can't see it immediately.)
+
 
 Once logged in, navigate to "Self Service Options", then click on "Student Registration".
 
