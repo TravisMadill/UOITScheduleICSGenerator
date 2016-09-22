@@ -119,7 +119,7 @@
   </resheader>
   <data name="label1.Text" xml:space="preserve">
     <value>Use the web browser to log in to MyCampus.
-(Because this is a Windows based program, this is basically uses Internet Explorer in a fancy shell, so expect some wonky-ness in the formatting.)
+(Because this is a Windows based program, this basically uses Internet Explorer in a fancy shell, so expect some wonky-ness in the formatting.)
 
 Once logged in, navigate to "Self Service Options", then click on "Student Registration".
 
@@ -143,6 +143,7 @@ Replacement commands:
 &lt;Instructor&gt;: The instructor of the course.
 &lt;StartTime&gt;: The time the course starts.
 &lt;EndTime&gt;: The time the course ends.
-&lt;WeekNumber&gt;: The week number of this course (used only for biweekly courses, like labs)</value>
+&lt;WeekNumber&gt;: The week number of this course (used only for biweekly courses, like labs)
+</value>
   </data>
 </root>
