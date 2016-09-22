@@ -49,7 +49,7 @@ namespace UOITScheduleICSGenerator
             }
             catch (IOException)
             {
-                title = "<ClassType>: <ClassName> (<CRN>)";
+                title = "<ClassType>: <CourseName> (<CRN>)";
                 desc = @"Course code: <CourseCode>\nCRN: <CRN>";
                 loc = "<Location>";
                 lec = "Lec.";
