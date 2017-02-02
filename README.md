@@ -25,4 +25,3 @@ Click "Formatting options" to change the layout.
 * `<Instructor>`: The instructor of the course.
 * `<StartTime>`: The time the course starts.
 * `<EndTime>`: The time the course ends.
-* `<WeekNumber>`: The week number of this course (used only for biweekly courses, like labs)
