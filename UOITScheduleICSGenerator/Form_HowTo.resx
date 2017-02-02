@@ -143,7 +143,6 @@ Replacement commands:
 &lt;Instructor&gt;: The instructor of the course.
 &lt;StartTime&gt;: The time the course starts.
 &lt;EndTime&gt;: The time the course ends.
-&lt;WeekNumber&gt;: The week number of this course (used only for biweekly courses, like labs)
 </value>
   </data>
 </root>

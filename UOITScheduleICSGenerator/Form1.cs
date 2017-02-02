@@ -94,6 +94,7 @@ namespace UOITScheduleICSGenerator
                     {
                         if (classInfo[j].Equals(""))
                             continue;
+                        //else System.Diagnostics.Debug.WriteLine(tablePos + " " + classInfo[j]);
 
                         if (tablePos == 0)
                         {
@@ -107,33 +108,33 @@ namespace UOITScheduleICSGenerator
                             c.CRN = classInfo[j];
                         else if (tablePos == 9)
                             c.Instructor = classInfo[j];
-                        else if (tablePos > 20)
+                        else if (tablePos > 18)
                         {
-                            if ((tablePos - 21) % 8 == 0) // Week indicator
+                            /*if ((tablePos - 19) % 8 == 0) // Week indicator
                             {
                                 if (classInfo[j] == "W1" || classInfo[j] == "W2")
                                     c.WeekNumber = classInfo[j];
                                 else c.WeekNumber = "N/A";
-                            }
-                            else if ((tablePos - 21) % 8 == 2) // Class time
+                            }*/
+                            if ((tablePos - 19) % 6 == 0) // Class time
                             {
                                 time = classInfo[j];
                                 if (time == "TBA")
                                     notTBA = false;
                             }
-                            else if ((tablePos - 21) % 8 == 3 && notTBA) // Weekday
+                            else if ((tablePos - 19) % 6 == 1 && notTBA) // Weekday
                             {
                                 c.Weekday = classInfo[j];
                                 if (time == "TBA")
                                     notTBA = false;
                             }
-                            else if ((tablePos - 21) % 8 == 4 && notTBA) // Location
+                            else if ((tablePos - 19) % 6 == 2 && notTBA) // Location
                                 c.Location = classInfo[j];
-                            else if ((tablePos - 21) % 8 == 5 && notTBA) // Class dates
+                            else if ((tablePos - 19) % 6 == 3 && notTBA) // Class dates
                                 c.parseDateAndTime(classInfo[j], time);
-                            else if ((tablePos - 21) % 8 == 6 && notTBA) // Class type
+                            else if ((tablePos - 19) % 6 == 4 && notTBA) // Class type
                                 c.ClassType = classInfo[j];
-                            else if ((tablePos - 21) % 8 == 7) // Technically instructor, but we got it earlier, so use this opporitunity to add other times for this class
+                            else if ((tablePos - 19) % 6 == 5) // Technically instructor, but we got it earlier, so use this opporitunity to add other times for this class
                             {
                                 if (notTBA) //If this course's times are TBA (usually for online courses), then don't add them to the schedule.
                                     schedule.Add(c.Clone());
@@ -207,11 +208,14 @@ namespace UOITScheduleICSGenerator
             {
                 //Strip down all the stuff that's not the login form.
                 string text = webBrowser1.DocumentText;
-                webBrowser1.DocumentText = text.Substring(0, text.IndexOf("<header")) + text.Substring(text.IndexOf("</header") + "</header>".Length, text.IndexOf("<!-- END LOGIN AREA -->") - text.IndexOf("</header") - 9)
-                    .Replace("<nav aria-label=\"Breadcrumbs\" class=\"breadcrumbs\" role=\"menubar\">", "")
-                    .Replace("<li role=\"menuitem\"><a href=\"../index.php\">UOIT</a></li>", "")
-                    .Replace("<li class=\"current\" role=\"menuitem\">MyCampus</li>", "")
-                    .Replace("</nav>", "");
+                int start = 0;
+                int start_end = text.IndexOf("<!-- Off-canvas wrapper -->");
+                int form = text.IndexOf("<!--START LOGIN AREA-->", start_end);
+                int form_end = text.IndexOf("<br/>", form);
+                int end = text.IndexOf("<script src=\"https://shared.uoit.ca/global-2.1/dist/js/global.js\" type=\"text/javascript\"></script>", form_end);
+                int end_end = text.Length;
+
+                webBrowser1.DocumentText = text.Substring(start, start_end) + text.Substring(form, form_end - form) + text.Substring(end, end_end - end);
                 head = false;
             }
         }
