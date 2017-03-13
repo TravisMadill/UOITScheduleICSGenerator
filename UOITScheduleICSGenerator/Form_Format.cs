@@ -38,6 +38,7 @@ namespace UOITScheduleICSGenerator
                             comboBox1.SelectedIndex = br.ReadInt32();
                         }
                         else checkBox1.Checked = false;
+                        checkBox3.Checked = br.ReadBoolean();
 
                         br.Close();
                     }
@@ -52,6 +53,7 @@ namespace UOITScheduleICSGenerator
                     textBox6.Text = "Lab"; //Laboratory
                     checkBox2.Checked = true; //Busy
                     checkBox1.Checked = true;
+                    checkBox3.Checked = false;
                     numericUpDown1.Value = 20;
                     comboBox1.SelectedIndex = 0;
                 }
@@ -62,9 +64,7 @@ namespace UOITScheduleICSGenerator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!File.Exists(settingFilePath))
-                File.Create(settingFilePath);
-            using(BinaryWriter bw = new BinaryWriter(File.Open(settingFilePath, FileMode.Open)))
+            using(BinaryWriter bw = new BinaryWriter(File.Open(settingFilePath, FileMode.OpenOrCreate)))
             {
                 bw.Write(textBox1.Text);
                 bw.Write(textBox2.Text.Replace(Environment.NewLine, @"\n"));
@@ -79,6 +79,7 @@ namespace UOITScheduleICSGenerator
                     bw.Write(numericUpDown1.Value);
                     bw.Write(comboBox1.SelectedIndex);
                 }
+                bw.Write(checkBox3.Checked);
                 bw.Close();
             }
             Console.WriteLine("Saved to settings.txt");

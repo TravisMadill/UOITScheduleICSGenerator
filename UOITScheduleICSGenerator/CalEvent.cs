@@ -27,7 +27,7 @@ namespace UOITScheduleICSGenerator
         {
             CalEvent ce = new CalEvent();
             string title, desc, loc, lec, tut, lab, reminder = null;
-            bool busy;
+            bool busy, showRNumOnly;
             try
             {
                 using(BinaryReader br = new BinaryReader(File.Open(Form_Format.settingFilePath, FileMode.Open)))
@@ -45,6 +45,7 @@ namespace UOITScheduleICSGenerator
                         reminder += " ";
                         reminder += br.ReadInt32().ToString();
                     }
+                    showRNumOnly = br.ReadBoolean();
                 }
             }
             catch (IOException)
@@ -57,6 +58,7 @@ namespace UOITScheduleICSGenerator
                 lab = "Lab";
                 reminder = "20 0";
                 busy = true;
+                showRNumOnly = false;
             }
             switch (c.Weekday)
             {
@@ -77,9 +79,9 @@ namespace UOITScheduleICSGenerator
                     break;
             }
 
-            ce.Name = replaceXMLTags(title, c, lec, tut, lab);
-            ce.Description = replaceXMLTags(desc, c, lec, tut, lab);
-            ce.Location = replaceXMLTags(loc, c, lec, tut, lab);
+            ce.Name = replaceXMLTags(title, c, lec, tut, lab, showRNumOnly);
+            ce.Description = replaceXMLTags(desc, c, lec, tut, lab, showRNumOnly);
+            ce.Location = replaceXMLTags(loc, c, lec, tut, lab, showRNumOnly);
             c.StartDate = getProperDate(c.StartDate, c.Weekday); //Start event on proper day, rather than everything starting on the first day
             ce.StartTime = DateTime.Parse(c.StartDate + " " + c.StartTime);
             ce.EndTime = DateTime.Parse(c.StartDate + " " + c.EndTime);
@@ -121,14 +123,14 @@ namespace UOITScheduleICSGenerator
             return dt.AddDays(daysToAdd).ToShortDateString();
         }
 
-        public static string replaceXMLTags(string s, Class c, string lec, string tut, string lab)
+        public static string replaceXMLTags(string s, Class c, string lec, string tut, string lab, bool showRNumOnly)
         {
             return s.Replace("<ClassType>", c.ClassType.Replace("Lecture", lec).Replace("Tutorial", tut).Replace("Laboratory", lab))
                 .Replace("<CourseName>", c.CourseName)
                 .Replace("<CourseCode>", c.CourseCode)
                 .Replace("<CourseSection>", c.CourseSection)
                 .Replace("<CRN>", c.CRN)
-                .Replace("<Location>", c.Location)
+                .Replace("<Location>", showRNumOnly ? c.Location.Split(' ')[c.Location.Split(' ').Length - 1] : c.Location)
                 .Replace("<Instructor>", c.Instructor)
                 .Replace("<StartTime>", c.StartTime)
                 .Replace("<EndTime>", c.EndTime)
