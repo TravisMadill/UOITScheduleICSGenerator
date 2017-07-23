@@ -78,7 +78,7 @@ namespace UOITScheduleICSGenerator
 
                 // Strip all HTML tags from each split.
                 for (int i = 0; i < page.Length - 1; i++)
-                    page[i] = Regex.Replace(page[i].Replace("\n", ""), "<[^>]+>", "ÿ").Replace(" (ÿPÿ)", "");
+                    page[i] = Regex.Replace(page[i].Replace("\n", ""), "<[^>]+>", "ÿ").Replace(" (ÿPÿ)", "").Replace("ÿTBAÿ", "TBA");
 
                 //Start going through each course table and adding them to the master schedule.
                 List<Class> schedule = new List<Class>();
@@ -108,33 +108,33 @@ namespace UOITScheduleICSGenerator
                             c.CRN = classInfo[j];
                         else if (tablePos == 9)
                             c.Instructor = classInfo[j];
-                        else if (tablePos > 18)
+                        else if (tablePos > 19)
                         {
-                            /*if ((tablePos - 19) % 8 == 0) // Week indicator
+                            if ((tablePos - 20) % 7 == 0) // Week indicator
                             {
                                 if (classInfo[j] == "W1" || classInfo[j] == "W2")
                                     c.WeekNumber = classInfo[j];
                                 else c.WeekNumber = "N/A";
-                            }*/
-                            if ((tablePos - 19) % 6 == 0) // Class time
+                            }
+                            if ((tablePos - 20) % 7 == 1) // Class time
                             {
                                 time = classInfo[j];
                                 if (time == "TBA")
                                     notTBA = false;
                             }
-                            else if ((tablePos - 19) % 6 == 1 && notTBA) // Weekday
+                            else if ((tablePos - 20) % 7 == 2 && notTBA) // Weekday
                             {
                                 c.Weekday = classInfo[j];
                                 if (time == "TBA")
                                     notTBA = false;
                             }
-                            else if ((tablePos - 19) % 6 == 2 && notTBA) // Location
+                            else if ((tablePos - 20) % 7 == 3 && notTBA) // Location
                                 c.Location = classInfo[j];
-                            else if ((tablePos - 19) % 6 == 3 && notTBA) // Class dates
+                            else if ((tablePos - 20) % 7 == 4 && notTBA) // Class dates
                                 c.parseDateAndTime(classInfo[j], time);
-                            else if ((tablePos - 19) % 6 == 4 && notTBA) // Class type
+                            else if ((tablePos - 20) % 7 == 5 && notTBA) // Class type
                                 c.ClassType = classInfo[j];
-                            else if ((tablePos - 19) % 6 == 5) // Technically instructor, but we got it earlier, so use this opporitunity to add other times for this class
+                            else if ((tablePos - 20) % 7 == 6) // Technically instructor, but we got it earlier, so use this opporitunity to add other times for this class
                             {
                                 if (notTBA) //If this course's times are TBA (usually for online courses), then don't add them to the schedule.
                                     schedule.Add(c.Clone());
