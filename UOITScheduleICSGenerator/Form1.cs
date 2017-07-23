@@ -112,7 +112,7 @@ namespace UOITScheduleICSGenerator
                         {
                             if ((tablePos - 20) % 7 == 0) // Week indicator
                             {
-                                if (classInfo[j] == "W1" || classInfo[j] == "W2")
+                                if (classInfo[j].Contains("W1") || classInfo[j].Contains("W2"))
                                     c.WeekNumber = classInfo[j];
                                 else c.WeekNumber = "N/A";
                             }
