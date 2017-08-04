@@ -239,9 +239,9 @@
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(15, 149);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(198, 17);
+            this.checkBox3.Size = new System.Drawing.Size(251, 17);
             this.checkBox3.TabIndex = 18;
-            this.checkBox3.Text = "<Location>: Show room number only";
+            this.checkBox3.Text = "<Location>: Use acronyms instead of full names";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // Form_Format

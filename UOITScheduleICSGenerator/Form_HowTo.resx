@@ -128,7 +128,7 @@ Then you can either use the buttons to jump to the term selection page to select
 Then you MUST use the button that takes you to the detailed schedule page.
 
 If you are already on the schedule page, but still getting an error, try pressing the "Go to schedule page" button anyway.
-Reason being, this program cannot read within frames. If that doesn't make sense, then don't worry about it, just press the button.
+Reason being, this program cannot read within iframes. If that doesn't make sense, then don't worry about it, just press the button.
 
 You can also manually format the calendar information to your liking as well.
 Click "Formatting options" to change the layout.

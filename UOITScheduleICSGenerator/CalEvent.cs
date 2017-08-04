@@ -130,11 +130,109 @@ namespace UOITScheduleICSGenerator
                 .Replace("<CourseCode>", c.CourseCode)
                 .Replace("<CourseSection>", c.CourseSection)
                 .Replace("<CRN>", c.CRN)
-                .Replace("<Location>", showRNumOnly ? c.Location.Split(' ')[c.Location.Split(' ').Length - 1] : c.Location)
+                .Replace("<Location>", showRNumOnly ? getLocationAcronym(c) : getLocationFullName(c))
                 .Replace("<Instructor>", c.Instructor)
                 .Replace("<StartTime>", c.StartTime)
                 .Replace("<EndTime>", c.EndTime)
                 .Replace("<WeekNumber>", c.WeekNumber);
+        }
+
+        public static string getLocationAcronym(Class c)
+        {
+            string s = c.Location.TrimEnd(' ');
+            string rm = c.Location.Split(' ')[c.Location.Split(' ').Length - 1];
+            s = s.Remove(s.LastIndexOf(' '));
+            while (!Char.IsNumber(rm[0]) && rm.Length > 1)
+                rm = rm.Substring(1);
+
+            switch (s)
+            {
+                case "Science Building (UA)":
+                    return "UA " + rm;
+                case "Business and IT Building (UB)":
+                    return "UB " + rm;
+                case "Energy Research Centre (ERC)":
+                    return "ERC " + rm;
+                case "Software and Informatics Resea":
+                    return "SIRC " + rm;
+                case "UL Building":
+                    return "UL " + rm;
+                case "Simcoe Building/J-Wing":
+                    return "Simcoe J " + rm;
+                case "OPG Engineering Building":
+                    return "ENG " + rm;
+                case "University Pavilion":
+                    return "UP" + rm;
+                case "61 Charles Street Building":
+                    return "DTA " + rm;
+                case "Bordessa Hall":
+                    return "DTB " + rm;
+                case "Regent Theatre":
+                    return "DTR " + rm;
+                case "Education Building":
+                    return "EDU " + rm;
+                case "Georgian College":
+                    return "Georgian College (" + rm + ")";
+                case "Off Site Location":
+                    return "Offsite location";
+                case "Virtual Adobe Connect":
+                    return "Online (" + rm + ")";
+                case "N/A":
+                    return "N/A";
+                default:
+                    System.Diagnostics.Debug.WriteLine("Unknown acronym for " + s);
+                    break;
+            }
+            return c.Location;
+        }
+
+        public static string getLocationFullName(Class c)
+        {
+            string s = c.Location.TrimEnd(' ');
+            string rm = c.Location.Split(' ')[c.Location.Split(' ').Length - 1];
+            s = s.Remove(s.LastIndexOf(' '));
+            while (!Char.IsNumber(rm[0]) && rm.Length > 1)
+                rm = rm.Substring(1);
+
+            switch (s)
+            {
+                case "Science Building (UA)":
+                    return "Science Bldg., room " + rm;
+                case "Business and IT Building (UB)":
+                    return "Business & IT Bldg., room " + rm;
+                case "Energy Research Centre (ERC)":
+                    return "Energy Research Ctr., room " + rm;
+                case "Software and Informatics Resea":
+                    return "Software & Informatics Research Bldg., room " + rm;
+                case "UL Building":
+                    return "Library Portables, room " + rm;
+                case "Simcoe Building/J-Wing":
+                    return "Simcoe Bldg., J Wing, room " + rm;
+                case "OPG Engineering Building":
+                    return "Engineering Bldg., room " + rm;
+                case "University Pavilion":
+                    return "University Pavilion " + rm;
+                case "61 Charles Street Building":
+                    return "61 Charles St. (Dtwn. Bldg. A), room " + rm;
+                case "Bordessa Hall":
+                    return "Bordessa Hall (Dtwn. Bldg. B), room " + rm;
+                case "Regent Theatre":
+                    return "Regent Theatre, room " + rm;
+                case "Education Building":
+                    return "Education Bldg., room " + rm;
+                case "Georgian College":
+                    return "Georgian College (" + rm + ")";
+                case "Off Site Location":
+                    return "Offsite location";
+                case "Virtual Adobe Connect":
+                    return "Online class #" + rm;
+                case "N/A":
+                    return "Not available";
+                default:
+                    System.Diagnostics.Debug.WriteLine("Unknown location: " + s);
+                    break;
+            }
+            return c.Location;
         }
 
         public string GetVEventString()
