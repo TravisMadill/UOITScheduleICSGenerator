@@ -141,7 +141,7 @@ namespace UOITScheduleICSGenerator
         {
             string s = c.Location.TrimEnd(' ');
             string rm = c.Location.Split(' ')[c.Location.Split(' ').Length - 1];
-            s = s.Remove(s.LastIndexOf(' '));
+            try { s = s.Remove(s.LastIndexOf(' ')); } catch (Exception) { }
             while (!Char.IsNumber(rm[0]) && rm.Length > 1)
                 rm = rm.Substring(1);
 
@@ -179,6 +179,8 @@ namespace UOITScheduleICSGenerator
                     return "Online (" + rm + ")";
                 case "N/A":
                     return "N/A";
+                case "TBA":
+                    return "TBA";
                 default:
                     System.Diagnostics.Debug.WriteLine("Unknown acronym for " + s);
                     break;
@@ -190,7 +192,7 @@ namespace UOITScheduleICSGenerator
         {
             string s = c.Location.TrimEnd(' ');
             string rm = c.Location.Split(' ')[c.Location.Split(' ').Length - 1];
-            s = s.Remove(s.LastIndexOf(' '));
+            try { s = s.Remove(s.LastIndexOf(' ')); } catch (Exception) { }
             while (!Char.IsNumber(rm[0]) && rm.Length > 1)
                 rm = rm.Substring(1);
 
@@ -225,9 +227,11 @@ namespace UOITScheduleICSGenerator
                 case "Off Site Location":
                     return "Offsite location";
                 case "Virtual Adobe Connect":
-                    return "Online class #" + rm;
+                    return "Online Adobe Connect class #" + rm;
                 case "N/A":
                     return "Not available";
+                case "TBA":
+                    return "Not yet determined";
                 default:
                     System.Diagnostics.Debug.WriteLine("Unknown location: " + s);
                     break;
