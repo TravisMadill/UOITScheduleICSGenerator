@@ -67,10 +67,13 @@ namespace UOITScheduleICSGenerator
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (!webBrowser1.DocumentText.Contains("<TITLE>Student Detail Schedule</TITLE>"))
+            if (!webBrowser1.DocumentText.Contains("<title>Student Detail Schedule</title>"))
+            {
                 MessageBox.Show("This is not the correct webpage." +
                     (webBrowser1.DocumentText.Contains("<frameset") ? "\n\nIf you ARE on the schedule page, press the \"Go to schedule page\" button so that the data can be read properly.\n\n...Yeah, it's a dumb thing to do, but the fact that this app needs to exist in order for this to work properly suggests otherwise."
                     : "\n\nMake sure you're on the \"Detailed Schedule\" page,\nand NOT the \"Schedule by Date & Time\" page."));
+                Console.WriteLine(webBrowser1.DocumentText);
+            }
             else
             {
                 //Split every section by a line break command.
@@ -144,7 +147,7 @@ namespace UOITScheduleICSGenerator
                     }
                 }
                 List<CalEvent> events = new List<CalEvent>();
-                foreach(Class c in schedule)
+                foreach (Class c in schedule)
                     events.Add(CalEvent.classAsCalEvent(c));
                 content = CalFile.CreateICSFileContents(events);
 
