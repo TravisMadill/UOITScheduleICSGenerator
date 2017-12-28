@@ -77,7 +77,7 @@ namespace UOITScheduleICSGenerator
             else
             {
                 //Split every section by a line break command.
-                string[] page = webBrowser1.DocumentText.Split(new string[] { "<BR>" }, StringSplitOptions.None);
+                string[] page = webBrowser1.DocumentText.Split(new string[] { "<br />" }, StringSplitOptions.None);
 
                 // Strip all HTML tags from each split.
                 for (int i = 0; i < page.Length - 1; i++)
